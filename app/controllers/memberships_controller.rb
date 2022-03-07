@@ -1,4 +1,4 @@
-class DonationsController < ApplicationController
+class MembershipsController < ApplicationController
     
     #index action (gets all the data)
      get "/memberships" do 
@@ -45,3 +45,4 @@ class DonationsController < ApplicationController
              {errors: "record not found with id #{params ['id']}"}.to_json
          end
      end
+end

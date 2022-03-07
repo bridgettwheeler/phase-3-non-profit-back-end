@@ -45,3 +45,4 @@ class DonationsController < ApplicationController
              {errors: "record not found with id #{params ['id']}"}.to_json
          end
      end
+end

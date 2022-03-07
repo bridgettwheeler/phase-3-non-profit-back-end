@@ -4,7 +4,7 @@ class CreateMemberships < ActiveRecord::Migration[5.2]
         t.datetime :start_date
         t.datetime :end_date
         t.integer :year
-        t.integer :user_id
+        t.belongs_to :user
     end
   end
 end

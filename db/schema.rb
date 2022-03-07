@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_161528) do
     t.integer "donation_amount"
     t.integer "year"
     t.datetime "donation_date"
+    t.index ["user_id"], name: "index_donations_on_user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -24,6 +25,24 @@ ActiveRecord::Schema.define(version: 2022_03_04_161528) do
     t.datetime "end_date"
     t.integer "year"
     t.integer "user_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.text "first_name"
+    t.text "last_name"
+    t.string "address_1"
+    t.string "address_2"
+    t.text "city"
+    t.text "state"
+    t.integer "zip_code"
+    t.string "email"
+    t.integer "phone"
+    t.string "password"
+    t.string "username"
+    t.integer "doner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
