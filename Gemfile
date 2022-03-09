@@ -12,6 +12,8 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'faker'
+gem 'rack-cors'
+gem 'rack-contrib'
 
 group :test do
   gem 'rspec'
