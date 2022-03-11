@@ -7,11 +7,16 @@ class MembershipsController < ApplicationController
  
      #create action
      post "/memberships" do
-         membership = Membership.new(params)
+        user = Membership.find_by_email(params[:email])
+        if user
+         membership = user.memberships.build(start_date: params[:startDate], end_date: params[:endDate], year: params[:year])
          if membership.save
-             membership.to_json(include :user)
+             membership.to_json(include: :user)
          else
-             membership.errors.full_messages.to_sentence
+             membership.errors.full_messages.to_sentance
+         end
+         else 
+            {error: "could not find user with email: #{params[:email]}"}.to_json
          end
      end
  

@@ -1,3 +1,5 @@
+require "pry";
+
 class DonationsController < ApplicationController
     
     #index action (gets all the data)
@@ -7,11 +9,17 @@ class DonationsController < ApplicationController
  
      #create action
      post "/donations" do
-         donation = Donation.new(params)
+        
+        user = User.find_by_email(params[:email])
+        if user
+         donation = user.donations.build(donation_amount: params[:amount], year: params[:year])
          if donation.save
-             donation.to_json(include :user)
+             donation.to_json(include: :user)
          else
              donation.errors.full_messages.to_sentance
+         end
+         else 
+            {error: "could not find user with email: #{params[:email]}"}.to_json
          end
      end
  

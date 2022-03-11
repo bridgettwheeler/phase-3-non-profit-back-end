@@ -7,11 +7,12 @@ class UsersController < ApplicationController
 
     #create action
     post "/users" do
-        user = User.new(params)
-        if user.save
-            user.to_json(include: [:donations, :memberships])
-        else
-            user.errors.full_messages.to_sentance
+        user = user.build(first_name: params[:firstName], last_name: params[:lastName], address_1: params[:address1], address_2: params[:address2], city: params[:city], state: params[:state], zip_code: params[:zip], email: params[:email], phone: params[:phone])
+         if user.save
+             user.to_json(include: :user)
+         else
+             user.errors.full_messages.to_sentance
+         end
         end
     end
 
@@ -49,7 +50,6 @@ class UsersController < ApplicationController
 
     def find_user
         @user = User.find_by_id(params ["id"])
-    end
 end
 
 
