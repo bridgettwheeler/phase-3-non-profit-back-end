@@ -46,7 +46,7 @@ class DonationsController < ApplicationController
  
      delete "/donations/:id" do 
      #first finding the user we want to delete
-         donation = Donation.find_by_id(params ["id"])
+         donation = Donation.find_by_id(params["id"])
          if donation.destroy
             {messages: "record seccessfully destroyed"}.to_json
          else

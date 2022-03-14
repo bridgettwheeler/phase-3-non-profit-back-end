@@ -7,11 +7,11 @@ class UsersController < ApplicationController
 
     #create action
     post "/users" do
-        user = user.build(first_name: params[:firstName], last_name: params[:lastName], address_1: params[:address1], address_2: params[:address2], city: params[:city], state: params[:state], zip_code: params[:zip], email: params[:email], phone: params[:phone])
+        user = User.new(first_name: params[:firstName], last_name: params[:lastName], address_1: params[:address1], address_2: params[:address2], city: params[:city], state: params[:state], zip_code: params[:zip], email: params[:email], phone: params[:phone])
          if user.save
-             user.to_json(include: :user)
+             user.to_json(include: [:donations, :memberships])
          else
-             user.errors.full_messages.to_sentance
+             user.errors.full_messages.to_sentence
          end
         end
     end
